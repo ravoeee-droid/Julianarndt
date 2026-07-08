@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://defi-intelligence.net/sitemap.xml

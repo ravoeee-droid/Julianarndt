@@ -1,0 +1,34 @@
+{
+  "functions": {
+    "api/inject.js": {
+      "includeFiles": [
+        "index.html",
+        "impressum.html",
+        "datenschutz.html",
+        "agb.html"
+      ]
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/api/inject?file=index.html"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/api/inject?file=index.html"
+    },
+    {
+      "source": "/impressum.html",
+      "destination": "/api/inject?file=impressum.html"
+    },
+    {
+      "source": "/datenschutz.html",
+      "destination": "/api/inject?file=datenschutz.html"
+    },
+    {
+      "source": "/agb.html",
+      "destination": "/api/inject?file=agb.html"
+    }
+  ]
+}

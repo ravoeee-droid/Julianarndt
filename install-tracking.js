@@ -63,6 +63,8 @@ const clarityLoader = `
 })();
 </script>`;
 
+const vercelAnalyticsScript = '<script defer src="/_vercel/insights/script.js"></script>';
+
 function updateFile(filePath, updater) {
   const fullPath = path.join(process.cwd(), filePath);
   if (!fs.existsSync(fullPath)) return false;
@@ -86,6 +88,10 @@ updateFile('index.html', (html) => {
     output = output.replace('</body>', `${clarityLoader}\n</body>`);
   }
 
+  if (!output.includes('/_vercel/insights/script.js')) {
+    output = output.replace('</body>', `${vercelAnalyticsScript}\n</body>`);
+  }
+
   output = output.replace(
     'Hilft uns zu verstehen, welche Inhalte genutzt werden und wie die Seite verbessert werden kann.',
     'Hilft uns mit Microsoft Clarity Heatmaps und Sitzungsaufzeichnungen zu verstehen, welche Inhalte genutzt werden und wie die Seite verbessert werden kann.'
@@ -95,9 +101,10 @@ updateFile('index.html', (html) => {
 });
 
 updateFile('datenschutz.html', (html) => {
-  if (html.includes('Microsoft Clarity')) return html;
+  let output = html;
 
-  const clarityPrivacy = `
+  if (!output.includes('Microsoft Clarity')) {
+    const clarityPrivacy = `
 <section class="legal-section">
   <h2>Microsoft Clarity</h2>
   <p>Diese Website kann Microsoft Clarity einsetzen, um das Nutzungsverhalten auf der Website in Form von Heatmaps und Sitzungsaufzeichnungen besser zu verstehen. Dies hilft uns, Inhalte, Benutzerführung und technische Darstellung zu verbessern.</p>
@@ -105,6 +112,20 @@ updateFile('datenschutz.html', (html) => {
   <p>Anbieter ist Microsoft Ireland Operations Limited, One Microsoft Place, South County Business Park, Leopardstown, Dublin 18, Irland.</p>
 </section>`;
 
-  if (html.includes('</main>')) return html.replace('</main>', `${clarityPrivacy}\n</main>`);
-  return html.replace('</body>', `${clarityPrivacy}\n</body>`);
+    if (output.includes('</main>')) output = output.replace('</main>', `${clarityPrivacy}\n</main>`);
+    else output = output.replace('</body>', `${clarityPrivacy}\n</body>`);
+  }
+
+  if (!output.includes('Vercel Web Analytics')) {
+    const vercelPrivacy = `
+<section class="legal-section">
+  <h2>Vercel Web Analytics</h2>
+  <p>Diese Website kann Vercel Web Analytics einsetzen, um Seitenaufrufe und technische Nutzungssignale datenschutzfreundlich auszuwerten. Die Auswertung dient der Verbesserung von Ladezeit, Nutzerführung und Seitenqualität.</p>
+</section>`;
+
+    if (output.includes('</main>')) output = output.replace('</main>', `${vercelPrivacy}\n</main>`);
+    else output = output.replace('</body>', `${vercelPrivacy}\n</body>`);
+  }
+
+  return output;
 });

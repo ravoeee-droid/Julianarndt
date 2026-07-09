@@ -1,21 +1,24 @@
 {
   "name": "DeFi Intelligence",
-  "short_name": "DeFi",
-  "description": "Maßgeschneiderter Investmentprozess mit Julian Claus Arndt.",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#050505",
-  "theme_color": "#050505",
+  "short_name": "DeFi Intelligence",
   "icons": [
     {
-      "src": "assets/android-chrome-192x192.png",
-      "sizes": "192x192",
+      "src": "assets/favicon-16.png",
+      "sizes": "16x16",
       "type": "image/png"
     },
     {
-      "src": "assets/android-chrome-512x512.png",
-      "sizes": "512x512",
+      "src": "assets/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/apple-touch-icon.png",
+      "sizes": "180x180",
       "type": "image/png"
     }
-  ]
+  ],
+  "theme_color": "#050505",
+  "background_color": "#050505",
+  "display": "standalone"
 }

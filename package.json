@@ -1,6 +1,0 @@
-{
-  "scripts": {
-    "build": "node install-tracking.js"
-  },
-  "devDependencies": {}
-}

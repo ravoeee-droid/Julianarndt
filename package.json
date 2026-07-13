@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "build": "node inject-calendar.js"
+  },
+  "devDependencies": {}
+}
